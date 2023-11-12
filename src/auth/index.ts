@@ -56,7 +56,7 @@ export const auth = lucia({
 
 export type Auth = typeof auth;
 
-export const githubAuth = google(auth, {
+export const googleAuth = google(auth, {
   clientId: config.env.GOOGLE_CLIENT_ID,
   clientSecret: config.env.GOOGLE_CLIENT_SECRET,
   redirectUri: `{config.env.HOST_URL}/api/auth/google/callback`,
