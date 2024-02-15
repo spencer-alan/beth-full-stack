@@ -1,6 +1,6 @@
 import { Elysia, t } from "elysia";
 import { LuciaError } from "lucia";
-import { serializeCookie } from "lucia/utils";
+import { parseCookie, serializeCookie } from "lucia/utils";
 import { googleAuth } from "../auth";
 import { config } from "../config";
 import { ctx } from "../context";
@@ -59,5 +59,13 @@ export const authController = new Elysia({
     set.redirect = url.toString();
   })
   .get("/google/callback", async ({ set, query, headers }) => {
-    const [state, code] = query;
+    const { state, code } = query;
+
+    const cookies = parseCookie(headers["cookie"] || "");
+    const state_cookie = cookies["google_auth_site"];
+
+    if (!state_cookie || !state || state_cookie !== state || !code) {
+      set.status = "Unauthorized";
+      return;
+    }
   });
