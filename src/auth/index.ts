@@ -49,7 +49,10 @@ export const auth = lucia({
   }),
   getUserAttributes: (data) => {
     return {
-      handle: data.handle,
+      name: data.name,
+      picture: data.picture,
+      email: data.email,
+      id: data.id,
     };
   },
 });
