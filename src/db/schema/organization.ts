@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-typebox";
 import { user } from ".";
@@ -8,6 +9,11 @@ export const organizations = sqliteTable("organization", {
   database_name: text("database_name").notNull(),
   database_auth_token: text("database_auth_token").notNull(),
 });
+
+export const organizationRelations = relations(organizations, ({ many }) => ({
+  user: many(user),
+}));
+
 export type Organization = typeof organizations.$inferSelect;
 export type InsertOrganization = typeof organizations.$inferInsert;
 
