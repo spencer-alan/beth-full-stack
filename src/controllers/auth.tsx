@@ -63,10 +63,11 @@ export const authController = new Elysia({
     const { state, code } = query;
 
     const cookies = parseCookie(headers["cookie"] || "");
-    const state_cookie = cookies["google_auth_site"];
+    const state_cookie = cookies["google_auth_state"];
 
     if (!state_cookie || !state || state_cookie !== state || !code) {
       set.status = "Unauthorized";
+      console.log("Aloha!: ", { state_cookie, state, code });
       return;
     }
 
@@ -104,7 +105,7 @@ export const authController = new Elysia({
           set,
           headers,
         },
-        "/",
+        "/new-user",
       );
     } catch (e) {
       log.error(e, "Error signing in with Google");

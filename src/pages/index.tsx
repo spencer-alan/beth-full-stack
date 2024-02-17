@@ -2,17 +2,10 @@ import { Suspense } from "beth-stack/jsx";
 import { Elysia } from "elysia";
 import { authed } from "../auth/middleware";
 import { BaseHtml } from "../components/base";
-import { InitialTweetList, TweetCreationForm } from "../components/tweets";
 import { ctx } from "../context";
 
 export const index = new Elysia()
   .use(ctx)
-  .derive(async (ctx) => {
-    const authRequest = ctx.auth.handleRequest(ctx);
-    const session = await authRequest.validate();
-
-    return { session };
-  })
   .get("/", async ({ htmlStream, session, db }) => {
     return htmlStream(() => (
       <BaseHtml>
@@ -28,11 +21,10 @@ export const index = new Elysia()
               >
                 Sign Out
               </a>
-              <TweetCreationForm />
             </>
           ) : (
             <a
-              href="/api/auth/login/google"
+              href="/login"
               hx-boost="false"
               class="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white transition duration-200 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
             >

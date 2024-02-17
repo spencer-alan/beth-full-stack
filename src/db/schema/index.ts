@@ -1,18 +1,3 @@
-import { relations } from "drizzle-orm";
-import { user } from "./auth";
-import { tweets } from "./tweets";
+export { organizations, organizationRelations } from "./organization";
 
-export { tweets } from "./tweets";
-
-export { key, session, user } from "./auth";
-
-export const userRelations = relations(user, ({ many }) => ({
-  tweets: many(tweets),
-}));
-
-export const tweetsRelations = relations(tweets, ({ one }) => ({
-  author: one(user, {
-    fields: [tweets.authorId],
-    references: [user.id],
-  }),
-}));
+export { key, session, user, userRelations } from "./auth";

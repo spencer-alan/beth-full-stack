@@ -29,11 +29,11 @@ export const login = new Elysia().use(ctx).get("/login", async (ctx) => {
         </div>
         <a
           hx-boost="false"
-          href="/login/google"
+          href="api/auth/login/google"
           class="display-block rounded-lg bg-gray-800 p-2 text-center text-white transition duration-200 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
         >
           Sign In with Google
-          <div class="i-logos-gogole-icon inline-block text-2xl" />
+          <div class="i-logos-google-icon inline-block text-2xl" />
         </a>
       </div>
     </BaseHtml>
