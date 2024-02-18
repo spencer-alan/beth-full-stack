@@ -2,7 +2,7 @@ import { libsql } from "@lucia-auth/adapter-sqlite";
 import { google } from "@lucia-auth/oauth/providers";
 import { lucia, Middleware } from "lucia";
 import { config } from "../config";
-import { client } from "../db";
+import { client } from "../db/primary";
 
 const envAliasMap = {
   production: "PROD",
